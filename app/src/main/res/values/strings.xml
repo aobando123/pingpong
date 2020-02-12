@@ -1,5 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PingPong</string>
+    <string name="mode_ready">Touch to play</string>
+    <string name="mode_pause">Paused</string>
+    <string name="mode_win">Score!!!</string>
+    <string name="mode_lose">Oh...</string>
+    <string name="menu_new_game">New game</string>
+    <string name="menu_exit">Exit</string>
+    <string name="menu_resume">Resume</string>
+    <string name="default_score">0    0</string>
+    <string name="app_name">Pong</string>
     <string name="title">Pong</string>
     <string name="start">Start</string>
 </resources>
