@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PingPong</string>
+    <string name="title">Pong</string>
+    <string name="start">Start</string>
 </resources>
