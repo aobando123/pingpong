@@ -9,4 +9,6 @@
     <string name="menu_resume">Resume</string>
     <string name="default_score">0    0</string>
     <string name="app_name">Pong</string>
+    <string name="title">Pong</string>
+    <string name="start">Start</string>
 </resources>
