@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.pingpong.activities.PongActivity;
 import com.example.pingpong.views.PongView;
@@ -26,7 +27,7 @@ public class MainActivity extends Activity {
 
     public void buttonTapHandler(View view) {
         Intent intent = new Intent(this, SecondActivity.class);
-        EditText editText = (EditText) findViewById(R.id.txtTitle);
+        TextView editText = (TextView) findViewById(R.id.txtTitle);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         // startActivity(intent);
