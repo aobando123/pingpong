@@ -10,10 +10,14 @@ import android.widget.TextView;
 import com.example.pingpong.activities.PongActivity;
 
 public class DifficultiesActivity extends Activity {
+
+    boolean isTwoPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.difficulties);
+        Bundle extras = getIntent().getExtras();
+        this.isTwoPlayer =  extras.getBoolean("isTwoPlayer");
     }
 
     public void setEasyDifficulty(View view) {
@@ -32,6 +36,7 @@ public class DifficultiesActivity extends Activity {
         Intent intent = new Intent(this, PongActivity.class);
         intent.putExtra("ballSpeed", ballSpeed);
         intent.putExtra("computerProbability", computerProbability);
+        intent.putExtra("isTwoPlayer", this.isTwoPlayer);
         startActivity(intent);
 
     }

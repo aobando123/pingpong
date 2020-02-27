@@ -122,8 +122,11 @@ public class PongView extends SurfaceView implements SurfaceHolder.Callback {
                     float y = event.getY();
                     float dy = y - mLastTouchY;
                     mLastTouchY = y;
+                    Player mPlayer =  mGameThread.getPlayerToMove(event);
+                    if (mGameThread.isTouchOnHumanPaddle(event)) {
+                        mGameThread.moveHumanPaddle(dy, mPlayer);
+                    }
 
-                    mGameThread.moveHumanPaddle(dy);
                 }
                 break;
             case MotionEvent.ACTION_UP:

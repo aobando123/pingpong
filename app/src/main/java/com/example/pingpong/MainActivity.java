@@ -26,21 +26,15 @@ public class MainActivity extends Activity {
     }
 
     public void vsAI(View view) {
-        Intent intent = new Intent(this, SecondActivity.class);
-        TextView editText = (TextView) findViewById(R.id.txtTitle);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        // startActivity(intent);
-        startActivity(new Intent(getBaseContext(), DifficultiesActivity.class));
+        Intent intent = new Intent(this, DifficultiesActivity.class);
+        intent.putExtra("isTwoPlayer", false);
+        startActivity(intent);
 
     }
     public void vsPlayer(View view) {
-        Intent intent = new Intent(this, SecondActivity.class);
-        TextView editText = (TextView) findViewById(R.id.txtTitle);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        // startActivity(intent);
-        startActivity(new Intent(getBaseContext(), DifficultiesActivity.class));
+        Intent intent = new Intent(this, DifficultiesActivity.class);
+        intent.putExtra("isTwoPlayer", true);
+        startActivity(intent);
 
     }
 
