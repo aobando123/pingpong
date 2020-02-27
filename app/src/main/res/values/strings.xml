@@ -11,4 +11,5 @@
     <string name="app_name">Pong</string>
     <string name="title">Pong</string>
     <string name="start">Start</string>
+    <string name="title_activity_difficult">DifficultActivity</string>
 </resources>
