@@ -22,12 +22,12 @@
             android:name=".activities.PongActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.NoTitleBar"></activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".DifficultiesActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.NoTitleBar"></activity>
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

@@ -14,9 +14,10 @@ public class DifficultiesActivity extends Activity {
     boolean isTwoPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Bundle extras = getIntent().getExtras();
+        setTheme(extras.getInt("themeId"));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.difficulties);
-        Bundle extras = getIntent().getExtras();
         this.isTwoPlayer =  extras.getBoolean("isTwoPlayer");
     }
 
