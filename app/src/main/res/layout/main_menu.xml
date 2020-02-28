@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +20,6 @@
             android:inputType="textPersonName"
             android:text="@string/title"
             android:textAlignment="center"
-            android:textColor="@android:color/white"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,11 +30,9 @@
             android:id="@+id/btnStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#333333"
             android:fontFamily="@font/pong_font"
             android:onClick="vsAI"
             android:text="VS AI"
-            android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.499"
@@ -45,15 +41,54 @@
             app:layout_constraintVertical_bias="0.189" />
 
         <Button
+            android:id="@+id/btnThemeLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pong_font"
+            android:onClick="themeButtonHandler"
+            android:text="Light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.047"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle"
+            app:layout_constraintVertical_bias="0.841" />
+
+        <Button
+            android:id="@+id/btnThemeDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pong_font"
+            android:onClick="themeButtonHandler"
+            android:text="Dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle"
+            app:layout_constraintVertical_bias="0.841" />
+
+        <Button
+            android:id="@+id/btnThemeBlue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pong_font"
+            android:onClick="themeButtonHandler"
+            android:text="Blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.952"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle"
+            app:layout_constraintVertical_bias="0.841" />
+
+        <Button
             android:id="@+id/btnStart3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="#333333"
             android:fontFamily="@font/pong_font"
             android:onClick="vsPlayer"
             android:text="Two Players"
-            android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
