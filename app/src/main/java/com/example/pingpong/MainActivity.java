@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.pingpong.activities.PongActivity;
 import com.example.pingpong.views.PongView;
@@ -14,10 +17,20 @@ import com.example.pingpong.views.PongView;
 public class MainActivity extends Activity {
 
 
+    public static final String EXTRA_MESSAGE = "Potato";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_menu);
+    }
 
+    public void buttonTapHandler(View view) {
+        Intent intent = new Intent(this, SecondActivity.class);
+        TextView editText = (TextView) findViewById(R.id.txtTitle);
+        String message = editText.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, message);
+        // startActivity(intent);
         startActivity(new Intent(getBaseContext(), PongActivity.class));
 
     }
@@ -32,6 +45,5 @@ public class MainActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-
     }
 }
