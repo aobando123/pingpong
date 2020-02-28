@@ -1,12 +1,65 @@
 <resources>
 
     <!-- Base application theme. -->
-<!--    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">-->
+    <!--    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">-->
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:textColor">@color/testColorAccent</item>
+        <item name="android:buttonStyle">@style/PrimaryButton</item>
+        <item name="android:colorBackground">@color/backgroundColorPrimary</item>
+        <!--        <item name="android:background">@color/backgroundColorPrimary</item>-->
     </style>
+
+
+    <style name="PrimaryButton" parent="android:style/Widget.Button">
+        <item name="android:background">@color/backgroundColorPrimary</item>
+        <item name="android:textColor">@color/testColorAccent</item>
+    </style>
+
+
+    <!-- Dark Theme -->
+
+    <style name="DarkTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:textColor">@color/testColorAccent</item>
+        <item name="android:buttonStyle">@style/PrimaryButtonDark</item>
+        <item name="android:colorBackground">@color/backgroundColorPrimaryDark</item>
+        <!--        <item name="android:background">@color/backgroundColorPrimary</item>-->
+    </style>
+
+    <style name="PrimaryButtonDark" parent="android:style/Widget.Button">
+        <item name="android:background">@color/backgroundColorPrimaryDark</item>
+        <item name="android:textColor">@color/testColorAccent</item>
+    </style>
+
+
+    <!-- Blue Theme -->
+
+    <style name="BlueTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:textColor">@color/backgroundColorPrimaryDark</item>
+        <item name="android:buttonStyle">@style/PrimaryButtonBlue</item>
+        <item name="android:colorBackground">@color/testColorAccent</item>
+        <!--        <item name="android:background">@color/backgroundColorPrimary</item>-->
+    </style>
+
+    <style name="PrimaryButtonBlue" parent="android:style/Widget.Button">
+        <item name="android:background">@color/testColorAccent</item>
+        <item name="android:textColor">@color/backgroundColorPrimary</item>
+    </style>
+
+
 
 </resources>
