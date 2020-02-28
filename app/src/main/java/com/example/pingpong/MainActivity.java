@@ -34,6 +34,7 @@ public class MainActivity extends Activity {
     public void vsPlayer(View view) {
         Intent intent = new Intent(this, DifficultiesActivity.class);
         intent.putExtra("isTwoPlayer", true);
+        intent.putExtra("themeId", themeId);
         startActivity(intent);
 
     }
