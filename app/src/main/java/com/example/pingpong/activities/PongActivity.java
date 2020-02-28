@@ -23,12 +23,16 @@ public class PongActivity  extends Activity {
             super.onCreate(savedInstanceState);
 
             setContentView(R.layout.pong_layout);
-
+            Bundle extras = getIntent().getExtras();
+            int ballSpeed = extras.getInt("ballSpeed");
+            float computerDifficulty= extras.getFloat("computerProbability");
+            boolean isTwoPlayer = extras.getBoolean("isTwoPlayer");
             final PongView mPongView = (PongView) findViewById(R.id.main);
             mPongView.setStatusView((TextView) findViewById(R.id.status));
             mPongView.setScoreView((TextView) findViewById(R.id.score));
 
             mGameThread = mPongView.getGameThread();
+            mGameThread.setGameValues(ballSpeed, computerDifficulty, isTwoPlayer);
             if (savedInstanceState == null) {
                 mGameThread.setState(PongThread.STATE_READY);
             } else {

@@ -24,10 +24,16 @@ public class MainActivity extends Activity {
         startActivity(new Intent(getBaseContext(), SecondActivity.class));
     }
 
-    public void buttonTapHandler(View view) {
-        Intent intent = new Intent(this, SecondActivity.class);
-        // startActivity(intent);
-        startActivity(new Intent(getBaseContext(), PongActivity.class));
+    public void vsAI(View view) {
+        Intent intent = new Intent(this, DifficultiesActivity.class);
+        intent.putExtra("isTwoPlayer", false);
+        startActivity(intent);
+
+    }
+    public void vsPlayer(View view) {
+        Intent intent = new Intent(this, DifficultiesActivity.class);
+        intent.putExtra("isTwoPlayer", true);
+        startActivity(intent);
 
     }
 

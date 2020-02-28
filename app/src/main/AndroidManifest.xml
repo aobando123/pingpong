@@ -18,12 +18,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activities.PongActivity"
-            android:theme="@android:style/Theme.NoTitleBar"
+        <activity
+            android:name=".activities.PongActivity"
+            android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="landscape"
-            android:configChanges="keyboardHidden|orientation">
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity
+            android:name=".DifficultiesActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
     </application>
 
 </manifest>

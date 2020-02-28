@@ -31,8 +31,8 @@ public class PongThread extends Thread {
     public static final int STATE_LOSE    = 3;
     public static final int STATE_WIN     = 4;
 
-    private static final int    PHYS_BALL_SPEED       = 8;
-    private static final int    PHYS_PADDLE_SPEED     = 8;
+    private int    PHYS_BALL_SPEED       = 8;
+    private int    PHYS_PADDLE_SPEED     = 8;
     private static final int    PHYS_FPS              = 60;
     private static final double PHYS_MAX_BOUNCE_ANGLE = 5 * Math.PI / 12; // 75 degrees in radians
     private static final int    PHYS_COLLISION_FRAMES = 5;
@@ -58,8 +58,10 @@ public class PongThread extends Thread {
     private int mState;
 
     private Player mHumanPlayer;
-    private Player mComputerPlayer;
+    private Player mSecondPlayer;
     private Ball mBall;
+
+    private boolean isTwoPlayer;
 
     private Paint mMedianLinePaint;
 
@@ -109,7 +111,7 @@ public class PongThread extends Thread {
         computerPlayerPaint.setAntiAlias(true);
         computerPlayerPaint.setColor(Color.RED);
 
-        mComputerPlayer = new Player(paddleWidth, paddleHeight, computerPlayerPaint);
+        mSecondPlayer = new Player(paddleWidth, paddleHeight, computerPlayerPaint);
 
         Paint ballPaint = new Paint();
         ballPaint.setAntiAlias(true);
@@ -136,6 +138,13 @@ public class PongThread extends Thread {
 
         mRandomGen = new Random();
         mComputerMoveProbability = 0.6f;
+    }
+
+    public void setGameValues(int ballSpeed, float computerMoveProbability, boolean isTwoPlayer) {
+        this.PHYS_BALL_SPEED = ballSpeed;
+        this.PHYS_PADDLE_SPEED = ballSpeed;
+        this.mComputerMoveProbability = computerMoveProbability;
+        this.isTwoPlayer = isTwoPlayer;
     }
 
     /**
@@ -192,9 +201,9 @@ public class PongThread extends Thread {
                             mHumanPlayer.score});
 
             map.putFloatArray(KEY_COMPUTER_PLAYER_DATA,
-                    new float[]{mComputerPlayer.bounds.left,
-                            mComputerPlayer.bounds.top,
-                            mComputerPlayer.score});
+                    new float[]{mSecondPlayer.bounds.left,
+                            mSecondPlayer.bounds.top,
+                            mSecondPlayer.score});
 
             map.putFloatArray(KEY_BALL_DATA,
                     new float[]{mBall.cx, mBall.cy, mBall.dx, mBall.dy});
@@ -210,8 +219,8 @@ public class PongThread extends Thread {
             movePlayer(mHumanPlayer, humanPlayerData[0], humanPlayerData[1]);
 
             float[] computerPlayerData = map.getFloatArray(KEY_COMPUTER_PLAYER_DATA);
-            mComputerPlayer.score = (int) computerPlayerData[2];
-            movePlayer(mComputerPlayer, computerPlayerData[0], computerPlayerData[1]);
+            mSecondPlayer.score = (int) computerPlayerData[2];
+            movePlayer(mSecondPlayer, computerPlayerData[0], computerPlayerData[1]);
 
             float[] ballData = map.getFloatArray(KEY_BALL_DATA);
             mBall.cx = ballData[0];
@@ -242,7 +251,7 @@ public class PongThread extends Thread {
                     break;
                 case STATE_LOSE:
                     setStatusText(res.getString(R.string.mode_lose));
-                    mComputerPlayer.score++;
+                    mSecondPlayer.score++;
                     setupNewRound();
                     break;
                 case STATE_PAUSE:
@@ -272,7 +281,7 @@ public class PongThread extends Thread {
     public void startNewGame() {
         synchronized (mSurfaceHolder) {
             mHumanPlayer.score = 0;
-            mComputerPlayer.score = 0;
+            mSecondPlayer.score = 0;
             setupNewRound();
             setState(STATE_RUNNING);
         }
@@ -286,14 +295,36 @@ public class PongThread extends Thread {
     }
 
    public boolean isTouchOnHumanPaddle(MotionEvent event) {
-        return mHumanPlayer.bounds.contains(event.getX(), event.getY());
+       if(this.isTwoPlayer) {
+           return  this.isPlayerTouched(mHumanPlayer, event.getX(), event.getY())|| this.isPlayerTouched(mSecondPlayer, event.getX(), event.getY());
+       }
+       return mHumanPlayer.bounds.contains(event.getX(), event.getY());
+
+
+
     }
 
-    public void moveHumanPaddle(float dy) {
+    public boolean isPlayerTouched(Player mPlayer, float x, float y) {
+       return mPlayer.bounds.contains(x, y);
+    }
+
+    public Player getPlayerToMove (MotionEvent event) {
+       if(this.isTwoPlayer) {
+           if(this.isPlayerTouched(mHumanPlayer, event.getX(), event.getY())) {
+               return mHumanPlayer;
+           } else if(this.isPlayerTouched(mSecondPlayer, event.getX(), event.getY())) {
+               return mSecondPlayer;
+           }
+       }
+       return mHumanPlayer;
+
+    }
+
+    public void moveHumanPaddle(float dy, Player mPlayer) {
         synchronized (mSurfaceHolder) {
-            movePlayer(mHumanPlayer,
-                    mHumanPlayer.bounds.left,
-                    mHumanPlayer.bounds.top + dy);
+            movePlayer(mPlayer,
+                    mPlayer.bounds.left,
+                    mPlayer.bounds.top + dy);
         }
     }
 
@@ -313,16 +344,16 @@ public class PongThread extends Thread {
         if (mHumanPlayer.collision > 0) {
             mHumanPlayer.collision--;
         }
-        if (mComputerPlayer.collision > 0) {
-            mComputerPlayer.collision--;
+        if (mSecondPlayer.collision > 0) {
+            mSecondPlayer.collision--;
         }
 
         if (collision(mHumanPlayer, mBall)) {
             handleCollision(mHumanPlayer, mBall);
             mHumanPlayer.collision = PHYS_COLLISION_FRAMES;
-        } else if (collision(mComputerPlayer, mBall)) {
-            handleCollision(mComputerPlayer, mBall);
-            mComputerPlayer.collision = PHYS_COLLISION_FRAMES;
+        } else if (collision(mSecondPlayer, mBall)) {
+            handleCollision(mSecondPlayer, mBall);
+            mSecondPlayer.collision = PHYS_COLLISION_FRAMES;
         } else if (ballCollidedWithTopOrBottomWall()) {
             mBall.dy = -mBall.dy;
         } else if (ballCollidedWithRightWall()) {
@@ -333,7 +364,7 @@ public class PongThread extends Thread {
             return;
         }
 
-        if (mRandomGen.nextFloat() < mComputerMoveProbability) {
+        if (this.isTwoPlayer == false && mRandomGen.nextFloat() < mComputerMoveProbability) {
             doAI();
         }
 
@@ -355,16 +386,16 @@ public class PongThread extends Thread {
      * Move the computer paddle to hit the ball.
      */
     private void doAI() {
-        if (mComputerPlayer.bounds.top > mBall.cy) {
+        if (mSecondPlayer.bounds.top > mBall.cy) {
             // move up
-            movePlayer(mComputerPlayer,
-                    mComputerPlayer.bounds.left,
-                    mComputerPlayer.bounds.top - PHYS_PADDLE_SPEED);
-        } else if (mComputerPlayer.bounds.top + mComputerPlayer.paddleHeight < mBall.cy) {
+            movePlayer(mSecondPlayer,
+                    mSecondPlayer.bounds.left,
+                    mSecondPlayer.bounds.top - PHYS_PADDLE_SPEED);
+        } else if (mSecondPlayer.bounds.top + mSecondPlayer.paddleHeight < mBall.cy) {
             // move down
-            movePlayer(mComputerPlayer,
-                    mComputerPlayer.bounds.left,
-                    mComputerPlayer.bounds.top + PHYS_PADDLE_SPEED);
+            movePlayer(mSecondPlayer,
+                    mSecondPlayer.bounds.left,
+                    mSecondPlayer.bounds.top + PHYS_PADDLE_SPEED);
         }
     }
 
@@ -391,13 +422,13 @@ public class PongThread extends Thread {
         final int middle = mCanvasWidth / 2;
         canvas.drawLine(middle, 1, middle, mCanvasHeight - 1, mMedianLinePaint);
 
-        setScoreText(mHumanPlayer.score + "    " + mComputerPlayer.score);
+        setScoreText(mHumanPlayer.score + "    " + mSecondPlayer.score);
 
         handleHit(mHumanPlayer);
-        handleHit(mComputerPlayer);
+        handleHit(mSecondPlayer);
 
         canvas.drawRoundRect(mHumanPlayer.bounds, 5, 5, mHumanPlayer.paint);
-        canvas.drawRoundRect(mComputerPlayer.bounds, 5, 5, mComputerPlayer.paint);
+        canvas.drawRoundRect(mSecondPlayer.bounds, 5, 5, mSecondPlayer.paint);
         canvas.drawCircle(mBall.cx, mBall.cy, mBall.radius, mBall.paint);
     }
 
@@ -422,9 +453,9 @@ public class PongThread extends Thread {
                 2,
                 (mCanvasHeight - mHumanPlayer.paddleHeight) / 2);
 
-        movePlayer(mComputerPlayer,
-                mCanvasWidth - mComputerPlayer.paddleWidth - 2,
-                (mCanvasHeight - mComputerPlayer.paddleHeight) / 2);
+        movePlayer(mSecondPlayer,
+                mCanvasWidth - mSecondPlayer.paddleWidth - 2,
+                (mCanvasHeight - mSecondPlayer.paddleHeight) / 2);
     }
 
     private void setStatusText(String text) {
@@ -488,7 +519,7 @@ public class PongThread extends Thread {
         if (player == mHumanPlayer) {
             mBall.cx = mHumanPlayer.bounds.right + mBall.radius;
         } else {
-            mBall.cx = mComputerPlayer.bounds.left - mBall.radius;
+            mBall.cx = mSecondPlayer.bounds.left - mBall.radius;
         }
     }
 
