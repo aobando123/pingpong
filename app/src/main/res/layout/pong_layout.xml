@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|top"
         android:layout_marginTop="20dip"
-        android:textColor="#FF7D27"
-        android:textSize="24sp"/>
+        android:textSize="24sp"
+        android:textColor="@color/colorAccent"/>
 
     <TextView
         android:id="@+id/status"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="25dip"
-        android:textColor="#ff8888ff"
-        android:textSize="24sp"/>
+        android:textSize="24sp"
+        android:textColor="@color/colorAccent"/>
 
 </merge>
