@@ -15,11 +15,12 @@
     </style>
 
     <style name="PrimaryButton" parent="android:style/Widget.Button">
-        <item name="android:background">@color/backgroundColorPrimaryLight</item>
+        <item name="android:background">@color/backgroundColorPrimaryDark</item>
         <item name="android:textColor">@color/textColorPrimary</item>
     </style>
 
-<!--///////////////////////////////////-->
+
+<!--//////////////////////////////////-->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

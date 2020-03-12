@@ -6,11 +6,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.pingpong.R;
 import com.example.pingpong.threads.PongThread;
 import com.example.pingpong.views.PongView;
 
-public class PongActivity  extends Activity {
+public class PongActivity  extends AppCompatActivity {
 
         private static final int MENU_NEW_GAME = 1;
         private static final int MENU_RESUME = 2;

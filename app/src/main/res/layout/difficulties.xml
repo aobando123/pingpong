@@ -5,13 +5,19 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="match_parent">
 
-        <TextView android:id="@+id/txtTitle" android:layout_width="352dp" android:layout_height="90dp" android:layout_marginTop="28dp" android:ems="10" android:fontFamily="@font/pong_font" android:gravity="center" android:inputType="textPersonName" android:text="@string/title" android:textAlignment="center" android:textSize="24sp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.498" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+        <TextView android:id="@+id/txtTitle" android:layout_width="352dp" android:layout_height="90dp" android:ems="10" android:fontFamily="@font/pong_font" android:gravity="center" android:inputType="textPersonName" android:text="@string/title" android:textAlignment="center" android:textSize="24sp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.491" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
 
-        <Button android:id="@+id/btnEasy" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/pong_font" android:onClick="setEasyDifficulty" android:text="EASY" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.497" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/txtTitle" app:layout_constraintVertical_bias="0.126" />
+        <Button android:id="@+id/btnEasy" android:layout_width="0dp" android:layout_height="60dp" android:layout_marginBottom="8dp" android:fontFamily="@font/pong_font" android:onClick="setEasyDifficulty" android:text="EASY" app:layout_constraintBottom_toTopOf="@+id/btnNormal" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" />
 
-        <Button android:id="@+id/btnNormal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/pong_font" android:onClick="setNormalDifficulty" android:text="NORMAL" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.497" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/btnEasy" app:layout_constraintVertical_bias="0.144" />
+        <Button android:id="@+id/btnNormal" android:layout_width="0dp" android:layout_height="60dp" android:fontFamily="@font/pong_font" android:onClick="setNormalDifficulty" android:text="NORMAL" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="@+id/txtTitle" />
 
-        <Button android:id="@+id/btnHard" android:layout_width="wrap_content" android:layout_height="48dp" android:fontFamily="@font/pong_font" android:onClick="setHardDifficulty" android:text="HARD" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.497" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/btnNormal" app:layout_constraintVertical_bias="0.276" />
+        <Button android:id="@+id/btnHard" android:layout_width="0dp" android:layout_height="60dp" android:layout_marginTop="8dp" android:fontFamily="@font/pong_font" android:onClick="setHardDifficulty" android:text="HARD" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/btnNormal" />
+
+        <androidx.constraintlayout.widget.Guideline android:id="@+id/top10" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" app:layout_constraintGuide_percent="0.10" />
+
+        <androidx.constraintlayout.widget.Guideline android:id="@+id/center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" app:layout_constraintGuide_percent="0.90" />
+
+        <androidx.constraintlayout.widget.Guideline android:id="@+id/bottom10" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" app:layout_constraintGuide_percent="0.50" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

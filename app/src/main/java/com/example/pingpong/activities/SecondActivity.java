@@ -19,16 +19,16 @@ public class SecondActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        switch(potato) {
-            case R.id.btnThemeBlue:
-                setTheme(R.style.BlueTheme);
-                break;
-            case R.id.btnThemeDark:
-                setTheme(R.style.DarkTheme);
-                break;
-            default:
-                setTheme(R.style.AppTheme);
-        }
+//        switch(potato) {
+//            case R.id.btnThemeBlue:
+//                setTheme(R.style.DarkTheme);
+//                break;
+//            case R.id.btnThemeDark:
+//                setTheme(R.style.DarkTheme);
+//                break;
+//            default:
+//                setTheme(R.style.AppTheme);
+//        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
     }

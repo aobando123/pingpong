@@ -9,16 +9,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.example.pingpong.activities.PongActivity;
 import com.example.pingpong.activities.SecondActivity;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     public static int themeId = R.style.AppTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themeId);
+//        setTheme(themeId);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
 //        startActivity(new Intent(getBaseContext(), SecondActivity.class));
@@ -39,23 +43,16 @@ public class MainActivity extends Activity {
 
     }
 
-    public void themeButtonHandler(View view) {
-        switch(view.getId()) {
-            case R.id.btnThemeBlue:
-                themeId = R.style.BlueTheme;
-                break;
-            case R.id.btnThemeDark:
-                themeId = R.style.DarkTheme;
-                break;
-            default:
-                themeId = R.style.AppTheme;
+    public void toggleTheme(View view) {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-//        finish();
-        overridePendingTransition(0, 0);
-//        startActivity(getIntent());
-//        startActivity(new Intent(getBaseContext(), SecondActivity.class));
+
+//        overridePendingTransition(0, 0);
         recreate();
-        overridePendingTransition(0, 0);
+//        overridePendingTransition(0, 0);
     }
 
     // This method executes when the player starts the game
