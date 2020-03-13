@@ -12,4 +12,6 @@
     <string name="title">Pong</string>
     <string name="start">Start</string>
     <string name="title_activity_difficult">DifficultActivity</string>
+    <string name="title_activity_mode">ModeActivity</string>
+    <string name="title_activity_winner_screen">WinnerScreen</string>
 </resources>

@@ -14,6 +14,7 @@ import com.example.pingpong.activities.PongActivity;
 public class DifficultiesActivity extends AppCompatActivity {
 
     boolean isTwoPlayer;
+    String mode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Bundle extras = getIntent().getExtras();
@@ -21,6 +22,7 @@ public class DifficultiesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.difficulties);
         this.isTwoPlayer =  extras.getBoolean("isTwoPlayer");
+        this.mode = extras.getString("mode");
     }
 
     public void setEasyDifficulty(View view) {
@@ -40,6 +42,7 @@ public class DifficultiesActivity extends AppCompatActivity {
         intent.putExtra("ballSpeed", ballSpeed);
         intent.putExtra("computerProbability", computerProbability);
         intent.putExtra("isTwoPlayer", this.isTwoPlayer);
+        intent.putExtra("mode", this.mode);
         startActivity(intent);
 
     }

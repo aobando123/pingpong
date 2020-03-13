@@ -4,40 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ModeActivity">
-
+    tools:context=".WinnerScreen">
 
     <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="match_parent">
 
-        <TextView android:id="@+id/txtTitle" android:layout_width="352dp" android:layout_height="90dp" android:ems="10" android:fontFamily="@font/pong_font" android:gravity="center" android:inputType="textPersonName" android:text="@string/title" android:textAlignment="center" android:textSize="24sp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.491" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="352dp"
+            android:layout_height="90dp"
+            android:ems="10"
+            android:fontFamily="@font/pong_font"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:text="RESULTS..."
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtResults"
+            android:layout_width="352dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:fontFamily="@font/pong_font"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:text="Results..."
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
 
         <Button
-            android:id="@+id/BtnTime"
+            android:id="@+id/restart"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginBottom="28dp"
             android:fontFamily="@font/pong_font"
-            android:onClick="setTime"
-            android:text="Time Mode"
-            app:layout_constraintBottom_toTopOf="@+id/btnScore"
+            android:text="Play again"
+            app:layout_constraintBottom_toTopOf="@+id/menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/btnScore"
+            android:id="@+id/menu"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:fontFamily="@font/pong_font"
-            android:onClick="setScore"
-            android:text="Score Mode"
+            android:text="Go Back to Menu"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txtTitle"
-            app:layout_constraintVertical_bias="0.646" />
+            app:layout_constraintTop_toBottomOf="@+id/txtResults"
+            app:layout_constraintVertical_bias="0.802" />
 
         <androidx.constraintlayout.widget.Guideline android:id="@+id/top10" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" app:layout_constraintGuide_percent="0.10" />
 
@@ -46,5 +73,6 @@
         <androidx.constraintlayout.widget.Guideline android:id="@+id/bottom10" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" app:layout_constraintGuide_percent="0.50" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -31,6 +31,8 @@ public class PongThread extends Thread {
     public static final int STATE_LOSE    = 3;
     public static final int STATE_WIN     = 4;
 
+    public static final int WIN_SCORE     = 1;
+
     private int    PHYS_BALL_SPEED       = 8;
     private int    PHYS_PADDLE_SPEED     = 8;
     private static final int    PHYS_FPS              = 60;
@@ -49,6 +51,8 @@ public class PongThread extends Thread {
     private final Handler mStatusHandler;
 
     private final Handler mScoreHandler;
+
+    private final Handler mWinnerHandler;
 
     private final Context mContext;
 
@@ -84,10 +88,12 @@ public class PongThread extends Thread {
                final Context context,
                final Handler statusHandler,
                final Handler scoreHandler,
+               final Handler winnerScoreHandle,
                final AttributeSet attributeSet) {
         mSurfaceHolder = surfaceHolder;
         mStatusHandler = statusHandler;
         mScoreHandler = scoreHandler;
+        mWinnerHandler = winnerScoreHandle;
         mContext = context;
 
         mRun = false;
@@ -247,17 +253,27 @@ public class PongThread extends Thread {
                 case STATE_WIN:
                     setStatusText(res.getString(R.string.mode_win));
                     mHumanPlayer.score++;
+                    checkIfScoreWon();
                     setupNewRound();
                     break;
                 case STATE_LOSE:
                     setStatusText(res.getString(R.string.mode_lose));
                     mSecondPlayer.score++;
+                    checkIfScoreWon();
                     setupNewRound();
                     break;
                 case STATE_PAUSE:
                     setStatusText(res.getString(R.string.mode_pause));
                     break;
             }
+        }
+    }
+
+    public  void checkIfScoreWon() {
+        if(mHumanPlayer.score == WIN_SCORE) {
+            setWinnerScore();
+        } else if(mSecondPlayer.score == WIN_SCORE) {
+            setWinnerScore();
         }
     }
 
@@ -287,6 +303,15 @@ public class PongThread extends Thread {
         }
     }
 
+    public  String getWinner(){
+        if(mHumanPlayer.score > mSecondPlayer.score) {
+            return "Player 1 wins";
+        } else if(mSecondPlayer.score > mHumanPlayer.score) {
+           String message =  isTwoPlayer == true ? "Player 2 wins" : "AI wins";
+           return message;
+        }
+        return "It's a tie";
+    }
     /**
      * @return true if the game is in win, lose or pause state.
      */
@@ -465,6 +490,13 @@ public class PongThread extends Thread {
         b.putInt("vis", View.VISIBLE);
         msg.setData(b);
         mStatusHandler.sendMessage(msg);
+    }
+
+    private void setWinnerScore() {
+        Message msg = mStatusHandler.obtainMessage();
+        Bundle b = new Bundle();
+        msg.setData(b);
+        mWinnerHandler.sendMessage(msg);
     }
 
     private void hideStatusText() {

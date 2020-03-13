@@ -1,7 +1,9 @@
 package com.example.pingpong;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.pingpong.activities.PongActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -12,21 +14,28 @@ import android.view.View;
 
 public class ModeActivity extends AppCompatActivity {
 
+    boolean isTwoPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Bundle extras = getIntent().getExtras();
+        setTheme(extras.getInt("themeId"));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mode);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        this.isTwoPlayer =  extras.getBoolean("isTwoPlayer");
+    }
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+    public  void setTime(View view) {
+        Intent intent = new Intent(this, DifficultiesActivity.class);
+        intent.putExtra("isTwoPlayer", this.isTwoPlayer);
+        intent.putExtra("mode", "Time");
+        startActivity(intent);
+    }
+
+    public  void setScore(View view) {
+        Intent intent = new Intent(this, DifficultiesActivity.class);
+        intent.putExtra("isTwoPlayer", this.isTwoPlayer);
+        intent.putExtra("mode", "Score");
+        startActivity(intent);
     }
 
 }

@@ -29,14 +29,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void vsAI(View view) {
-        Intent intent = new Intent(this, DifficultiesActivity.class);
+        Intent intent = new Intent(this, ModeActivity.class);
         intent.putExtra("isTwoPlayer", false);
         intent.putExtra("themeId", themeId);
         startActivity(intent);
 
     }
     public void vsPlayer(View view) {
-        Intent intent = new Intent(this, DifficultiesActivity.class);
+        Intent intent = new Intent(this, ModeActivity.class);
         intent.putExtra("isTwoPlayer", true);
         intent.putExtra("themeId", themeId);
         startActivity(intent);

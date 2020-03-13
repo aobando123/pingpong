@@ -24,17 +24,27 @@ public class PongActivity  extends AppCompatActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
+
             setContentView(R.layout.pong_layout);
             Bundle extras = getIntent().getExtras();
             int ballSpeed = extras.getInt("ballSpeed");
             float computerDifficulty= extras.getFloat("computerProbability");
+            String mode = extras.getString("mode");
             boolean isTwoPlayer = extras.getBoolean("isTwoPlayer");
             final PongView mPongView = (PongView) findViewById(R.id.main);
+
+            mPongView.setReplayValues(ballSpeed, computerDifficulty, isTwoPlayer);
+
             mPongView.setStatusView((TextView) findViewById(R.id.status));
             mPongView.setScoreView((TextView) findViewById(R.id.score));
+            mPongView.setTimeView((TextView) findViewById(R.id.timer));
 
+            if( mode.equals("Time")) {
+                mPongView.startTimer();
+            }
             mGameThread = mPongView.getGameThread();
             mGameThread.setGameValues(ballSpeed, computerDifficulty, isTwoPlayer);
+
             if (savedInstanceState == null) {
                 mGameThread.setState(PongThread.STATE_READY);
             } else {
@@ -61,6 +71,7 @@ public class PongActivity  extends AppCompatActivity {
             menu.add(0, MENU_NEW_GAME, 0, R.string.menu_new_game);
             menu.add(0, MENU_RESUME, 0, R.string.menu_resume);
             menu.add(0, MENU_EXIT, 0, R.string.menu_exit);
+
 
             return true;
         }
