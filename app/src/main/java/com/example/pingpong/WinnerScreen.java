@@ -1,7 +1,9 @@
 package com.example.pingpong;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.pingpong.activities.PongActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -23,6 +25,21 @@ public class WinnerScreen extends AppCompatActivity {
         String a = extras.getString("winner", "results");
         String b = extras.getString("winner");
         winner.setText(a);
+    }
+
+    public void onPlayAgain(View view) {
+        Bundle extras = getIntent().getExtras();
+        Intent intent = new Intent(this, PongActivity.class);
+        intent.putExtra("ballSpeed", extras.getInt("ballSpeed"));
+        intent.putExtra("computerProbability", extras.getFloat("computerProbability"));
+        intent.putExtra("isTwoPlayer", extras.getBoolean("isTwoPlayer"));
+        intent.putExtra("mode", extras.getString("mode"));
+        startActivity(intent);
+    }
+
+    public  void onMainMenu(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 
